@@ -41,6 +41,14 @@ const LOCAL_PREVIEW_ORIGINS = new Set([
   'http://127.0.0.1:5500'
 ]);
 
+function hasBlobStorageAccess() {
+  return Boolean(
+    process.env.BLOB_READ_WRITE_TOKEN
+    || process.env.VERCEL_OIDC_TOKEN
+    || (IS_VERCEL && process.env.BLOB_STORE_ID)
+  );
+}
+
 const MIME_TYPES = {
   '.css': 'text/css; charset=utf-8',
   '.html': 'text/html; charset=utf-8',
@@ -179,7 +187,7 @@ async function readData() {
     return normalizeData(JSON.parse(fs.readFileSync(DATA_FILE, 'utf8')));
   }
 
-  if (!process.env.BLOB_READ_WRITE_TOKEN && !process.env.VERCEL_OIDC_TOKEN) {
+  if (!hasBlobStorageAccess()) {
     return readSeedData();
   }
 
@@ -312,7 +320,7 @@ async function validateProductionConfiguration() {
     throw new Error('SESSION_SECRET must be at least 32 characters in production.');
   }
 
-  if (USE_BLOB_STORAGE && !process.env.BLOB_READ_WRITE_TOKEN && !process.env.VERCEL_OIDC_TOKEN) {
+  if (USE_BLOB_STORAGE && !hasBlobStorageAccess()) {
     throw new Error('Connect a public Vercel Blob store before using the production admin.');
   }
 
@@ -652,9 +660,7 @@ async function handleApi(request, response, url) {
       adminConfigured: (
         ADMIN_PASSWORD !== DEFAULT_ADMIN_PASSWORD
         && SESSION_SECRET.length >= 32
-        && (!USE_BLOB_STORAGE || Boolean(
-          process.env.BLOB_READ_WRITE_TOKEN || process.env.VERCEL_OIDC_TOKEN
-        ))
+        && (!USE_BLOB_STORAGE || hasBlobStorageAccess())
       )
     });
     return true;
