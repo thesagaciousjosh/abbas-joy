@@ -1,0 +1,12 @@
+.admin-verification/
+.tools/
+.env
+.env.*
+!.env.example
+.DS_Store
+coverage/
+data/auth.json
+data/uploads/
+node_modules/
+npm-debug.log*
+public/

@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Abba's Joy</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#2d1a0f" />
+    <link rel="icon" type="image/jpeg" href="assets/favicon.jpg" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css?v=1.2.1" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html#home" class="brand" aria-label="Abba's Joy home">
+          <img
+            class="brand-logo"
+            src="assets/becca-hero-v2.webp"
+            alt=""
+            aria-hidden="true"
+            width="900"
+            height="1200"
+            decoding="async"
+          />
+          <span>Abba's Joy</span>
+        </a>
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primaryNavigation"
+        >
+          <span class="hamburger"></span>
+          <span class="sr-only">Open navigation menu</span>
+        </button>
+        <nav
+          class="primary-nav"
+          id="primaryNavigation"
+          aria-label="Primary navigation"
+        >
+          <ul class="nav-list">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#asl">ASL Tutoring</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="index.html#media">Media</a></li>
+            <li><a href="index.html#policy">FAQs</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <a class="btn btn-primary" href="blog.html">View Blog</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="section writing blog-page" id="admin">
+        <div class="container">
+          <p class="section-eyebrow">Admin</p>
+          <h1>Manage Abba's Joy blog posts</h1>
+          <div class="writing-intro">
+            <p>
+              This area is for Becca to publish posts and manage blog
+              categories.
+            </p>
+          </div>
+
+          <div class="admin-gate post-form-card" id="adminGate">
+            <h2>Admin login</h2>
+            <form id="adminLoginForm">
+              <label for="adminPassword">Admin password</label>
+              <div class="password-field">
+                <input
+                  type="password"
+                  id="adminPassword"
+                  placeholder="Enter admin password"
+                  autocomplete="current-password"
+                  required
+                />
+                <button type="button" data-toggle-password="#adminPassword">
+                  Show
+                </button>
+              </div>
+              <button class="btn btn-primary" type="submit">
+                Unlock Admin
+              </button>
+              <p
+                class="form-note"
+                id="adminLoginMessage"
+                aria-live="polite"
+              ></p>
+            </form>
+            <details class="admin-reset-panel" id="adminResetPanel" hidden>
+              <summary>Forgot password?</summary>
+              <form id="passwordResetForm">
+                <label for="resetKey">Private reset key</label>
+                <div class="password-field">
+                  <input
+                    type="password"
+                    id="resetKey"
+                    placeholder="Enter reset key"
+                    autocomplete="one-time-code"
+                    required
+                  />
+                  <button type="button" data-toggle-password="#resetKey">
+                    Show
+                  </button>
+                </div>
+                <label for="resetNewPassword">New admin password</label>
+                <div class="password-field">
+                  <input
+                    type="password"
+                    id="resetNewPassword"
+                    placeholder="At least 12 characters"
+                    autocomplete="new-password"
+                    required
+                    minlength="12"
+                  />
+                  <button
+                    type="button"
+                    data-toggle-password="#resetNewPassword"
+                  >
+                    Show
+                  </button>
+                </div>
+                <button class="btn btn-secondary" type="submit">
+                  Set New Password
+                </button>
+                <p
+                  class="form-note"
+                  id="passwordResetMessage"
+                  aria-live="polite"
+                ></p>
+              </form>
+            </details>
+          </div>
+
+          <div class="admin-workspace" id="adminWorkspace" hidden>
+            <div class="admin-toolbar">
+              <p class="form-note">
+                Admin mode is unlocked for this browser tab.
+              </p>
+              <button class="btn btn-secondary" type="button" id="adminLogout">
+                Lock Admin
+              </button>
+            </div>
+            <div class="password-settings post-form-card">
+              <h2>Admin password</h2>
+              <form id="passwordChangeForm">
+                <div class="form-row">
+                  <div>
+                    <label for="currentPassword">Current password</label>
+                    <div class="password-field">
+                      <input
+                        type="password"
+                        id="currentPassword"
+                        autocomplete="current-password"
+                        required
+                      />
+                      <button
+                        type="button"
+                        data-toggle-password="#currentPassword"
+                      >
+                        Show
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <label for="newAdminPassword">New password</label>
+                    <div class="password-field">
+                      <input
+                        type="password"
+                        id="newAdminPassword"
+                        autocomplete="new-password"
+                        minlength="12"
+                        required
+                      />
+                      <button
+                        type="button"
+                        data-toggle-password="#newAdminPassword"
+                      >
+                        Show
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-secondary" type="submit">
+                  Change Password
+                </button>
+                <p
+                  class="form-note"
+                  id="passwordChangeMessage"
+                  aria-live="polite"
+                ></p>
+              </form>
+            </div>
+            <div class="writing-grid">
+              <div class="post-form-card">
+                <h2>Share a new post</h2>
+                <form id="postForm">
+                  <input type="hidden" id="editingPostId" />
+                  <label for="postTitle">Title</label>
+                  <input
+                    type="text"
+                    id="postTitle"
+                    name="postTitle"
+                    placeholder="Post title"
+                    maxlength="160"
+                    required
+                  />
+
+                  <label for="postCategory">Category</label>
+                  <select
+                    id="postCategory"
+                    name="postCategory"
+                    required
+                  ></select>
+                  <div
+                    class="category-manager"
+                    role="group"
+                    aria-label="Manage blog categories"
+                  >
+                    <div class="category-add">
+                      <input
+                        type="text"
+                        id="newCategory"
+                        placeholder="New category"
+                        aria-label="New category"
+                        maxlength="50"
+                      />
+                      <button
+                        class="btn btn-secondary"
+                        type="button"
+                        id="addCategory"
+                      >
+                        Add
+                      </button>
+                    </div>
+                    <div
+                      class="category-list"
+                      id="categoryList"
+                      aria-live="polite"
+                    ></div>
+                  </div>
+
+                  <div class="form-row">
+                    <div>
+                      <label for="postDate">Post date</label>
+                      <input
+                        type="date"
+                        id="postDate"
+                        name="postDate"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label for="postTime">Post time</label>
+                      <input
+                        type="time"
+                        id="postTime"
+                        name="postTime"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <label for="postExcerpt">Excerpt</label>
+                  <textarea
+                    id="postExcerpt"
+                    name="postExcerpt"
+                    rows="4"
+                    placeholder="Short preview"
+                    maxlength="600"
+                    required
+                  ></textarea>
+
+                  <div class="form-row">
+                    <div class="image-upload-control">
+                      <input type="hidden" id="postImage" name="postImage" />
+                      <label for="postImageFile">Featured image</label>
+                      <input
+                        type="file"
+                        id="postImageFile"
+                        accept="image/jpeg,image/png,image/webp"
+                      />
+                      <p class="form-note">Choose a JPG, PNG, or WebP image.</p>
+                    </div>
+                    <div>
+                      <label for="postImageAlt">Image alt text</label>
+                      <input
+                        type="text"
+                        id="postImageAlt"
+                        name="postImageAlt"
+                        placeholder="Describe the image"
+                        maxlength="300"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="image-upload-preview"
+                    id="postImagePreviewWrap"
+                    hidden
+                  >
+                    <img
+                      id="postImagePreviewImage"
+                      src="assets/favicon.jpg"
+                      alt="Selected featured image preview"
+                    />
+                    <button
+                      class="btn btn-secondary"
+                      type="button"
+                      id="removePostImage"
+                    >
+                      Remove Image
+                    </button>
+                  </div>
+                  <p
+                    class="form-note"
+                    id="imageUploadStatus"
+                    aria-live="polite"
+                  ></p>
+
+                  <p class="form-label" id="postEditorLabel">Full content</p>
+                  <div
+                    class="editor-toolbar"
+                    role="toolbar"
+                    aria-label="Text formatting tools"
+                  >
+                    <button type="button" data-command="bold" title="Bold">
+                      B
+                    </button>
+                    <button type="button" data-command="italic" title="Italic">
+                      I
+                    </button>
+                    <button
+                      type="button"
+                      data-command="underline"
+                      title="Underline"
+                    >
+                      U
+                    </button>
+                    <button
+                      type="button"
+                      data-command="createLink"
+                      title="Link"
+                    >
+                      Link
+                    </button>
+                  </div>
+                  <div
+                    id="postEditor"
+                    class="rich-editor"
+                    contenteditable="true"
+                    role="textbox"
+                    aria-multiline="true"
+                    aria-required="true"
+                    aria-labelledby="postEditorLabel"
+                    spellcheck="true"
+                    tabindex="0"
+                    data-placeholder="Write the full post here"
+                  ></div>
+                  <div class="post-preview-panel">
+                    <h3>Post preview</h3>
+                    <article class="post-preview" id="postPreview">
+                      <p class="form-note">
+                        Start writing to preview the post.
+                      </p>
+                    </article>
+                  </div>
+
+                  <div class="admin-form-actions">
+                    <button
+                      class="btn btn-primary"
+                      type="submit"
+                      id="savePostButton"
+                    >
+                      Publish
+                    </button>
+                    <button
+                      class="btn btn-secondary"
+                      type="button"
+                      id="cancelPostEdit"
+                      hidden
+                    >
+                      Cancel Edit
+                    </button>
+                  </div>
+                  <p class="form-note">
+                    Posts are saved after the admin password is verified.
+                  </p>
+                </form>
+              </div>
+              <div class="post-list-card">
+                <h2>Recent posts</h2>
+                <div id="postsContainer" class="posts-container"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <p class="brand-footer">Abba's Joy by Becca Etudaiye</p>
+          <p>Faith. Communication. Creativity. Inclusion.</p>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <p><a href="tel:+2349069195136">+234 906 919 5136</a></p>
+          <p>
+            <a href="mailto:beckyofficial30@gmail.com"
+              >beckyofficial30@gmail.com</a
+            >
+          </p>
+        </div>
+        <div>
+          <h3>Follow</h3>
+          <p>
+            <a
+              href="https://www.instagram.com/joyetudaiye?igsh=amVrM3VjN2VoaDNt"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Instagram</a
+            >
+          </p>
+          <p>
+            <a
+              href="https://www.facebook.com/share/1BKkoxp8sc/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Facebook</a
+            >
+          </p>
+        </div>
+        <div>
+          <h3>Quick links</h3>
+          <p><a href="index.html#asl">ASL Tutoring</a></p>
+          <p><a href="blog.html">Blog</a></p>
+          <p><a href="index.html#policy">FAQs</a></p>
+          <p><a href="index.html#services">Services</a></p>
+          <p><a href="blog.html">Return to public blog</a></p>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>&copy; 2026 Abba's Joy. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <a
+      class="floating-whatsapp"
+      href="https://wa.me/2349069195136?text=Hello%2C%20Becca.%20I%20would%20like%20to%20book%20a%20session.%20Kindly%20send%20me%20the%20details%20on%20how%20to%20proceed."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Message Becca on WhatsApp"
+    >
+      <svg aria-hidden="true" viewBox="0 0 32 32">
+        <path
+          d="M16.04 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.25.59 4.45 1.72 6.39L3.2 28.8l6.56-1.72a12.74 12.74 0 0 0 6.28 1.6h.01c7.06 0 12.8-5.74 12.8-12.8 0-3.42-1.33-6.63-3.75-9.05a12.7 12.7 0 0 0-9.06-3.63Zm0 23.32h-.01c-1.88 0-3.72-.5-5.33-1.45l-.38-.22-3.89 1.02 1.04-3.79-.25-.39a10.56 10.56 0 0 1-1.62-5.69c0-5.76 4.69-10.44 10.46-10.44 2.79 0 5.42 1.09 7.39 3.06a10.38 10.38 0 0 1 3.06 7.38c0 5.76-4.69 10.52-10.47 10.52Zm5.73-7.84c-.31-.16-1.86-.92-2.15-1.02-.29-.11-.5-.16-.71.16-.21.31-.82 1.02-1 1.23-.18.21-.37.24-.68.08-.31-.16-1.32-.49-2.52-1.56-.93-.83-1.56-1.86-1.74-2.17-.18-.31-.02-.48.14-.64.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.39-.29.31-1.1 1.07-1.1 2.62s1.13 3.05 1.29 3.26c.16.21 2.23 3.41 5.4 4.78.75.32 1.34.52 1.8.66.76.24 1.45.21 1.99.13.61-.09 1.86-.76 2.13-1.49.26-.73.26-1.36.18-1.49-.08-.13-.29-.21-.61-.37Z"
+        />
+      </svg>
+    </a>
+
+    <script src="script.js?v=1.2.0"></script>
+  </body>
+</html>

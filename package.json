@@ -1,0 +1,26 @@
+{
+  "name": "abbas-joy",
+  "version": "1.0.0",
+  "description": "Accessible website and blog publishing service for Abba's Joy.",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "admin:reset": "node scripts/reset-admin-password.js",
+    "build": "node scripts/build-vercel.js",
+    "check": "node --check server.js && node --check script.js && npm run validate:html",
+    "optimize:images": "node scripts/optimize-images.js",
+    "start": "node server.js",
+    "test": "node --test test-auth.js test-frontend.js",
+    "validate:html": "html-validate index.html blog.html post.html admin.html"
+  },
+  "devDependencies": {
+    "html-validate": "^11.5.6",
+    "jsdom": "^29.1.1",
+    "sharp": "^0.35.3"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.6.1"
+  }
+}

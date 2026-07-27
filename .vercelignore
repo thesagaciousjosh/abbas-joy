@@ -1,0 +1,11 @@
+.admin-verification/
+.vscode/
+.env
+.env.*
+!.env.example
+data/auth.json
+data/uploads/
+node_modules/
+public/
+test-auth.js
+test-frontend.js
