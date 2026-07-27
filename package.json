@@ -9,9 +9,9 @@
   "scripts": {
     "admin:reset": "node scripts/reset-admin-password.js",
     "build": "node scripts/build-vercel.js",
-    "check": "node --check server.js && node --check script.js && npm run validate:html",
+    "check": "node --check local-server.js && node --check script.js && npm run validate:html",
     "optimize:images": "node scripts/optimize-images.js",
-    "start": "node server.js",
+    "start": "node local-server.js",
     "test": "node --test test-auth.js test-frontend.js",
     "validate:html": "html-validate index.html blog.html post.html admin.html"
   },

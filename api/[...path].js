@@ -1,4 +1,4 @@
-const { handleRequest } = require('../server');
+const { handleRequest } = require('../local-server');
 
 module.exports = async function handler(request, response) {
   await handleRequest(request, response);

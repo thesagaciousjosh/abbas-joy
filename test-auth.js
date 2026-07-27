@@ -55,7 +55,7 @@ before(async () => {
   const port = await getAvailablePort();
   baseUrl = `http://127.0.0.1:${port}`;
   dataDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'abbas-joy-test-'));
-  serverProcess = spawn(process.execPath, ['server.js'], {
+  serverProcess = spawn(process.execPath, ['local-server.js'], {
     cwd: __dirname,
     env: {
       ...process.env,
@@ -95,7 +95,7 @@ test('serves the public site with security and cache headers', async () => {
 });
 
 test('does not expose private or server-side files', async () => {
-  for (const privatePath of ['/data/auth.json', '/server.js', '/package.json', '/.admin-verification/server.js']) {
+  for (const privatePath of ['/data/auth.json', '/local-server.js', '/package.json', '/.admin-verification/server.js']) {
     const response = await fetch(`${baseUrl}${privatePath}`);
     assert.equal(response.status, 404, privatePath);
   }

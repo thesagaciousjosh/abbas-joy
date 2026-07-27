@@ -36,7 +36,6 @@ const MAX_UPLOAD_BYTES = 3_000_000;
 const MAX_UPLOAD_REQUEST_BYTES = 4_200_000;
 const sessions = new Map();
 const rateLimits = new Map();
-let productionValidation;
 const LOCAL_PREVIEW_ORIGINS = new Set([
   'http://localhost:5500',
   'http://127.0.0.1:5500'
@@ -178,6 +177,10 @@ async function readData() {
   if (!USE_BLOB_STORAGE) {
     ensureDataFile();
     return normalizeData(JSON.parse(fs.readFileSync(DATA_FILE, 'utf8')));
+  }
+
+  if (!process.env.BLOB_READ_WRITE_TOKEN && !process.env.VERCEL_OIDC_TOKEN) {
+    return readSeedData();
   }
 
   try {
@@ -631,8 +634,29 @@ function upsertCategory(data, category) {
 }
 
 async function handleApi(request, response, url) {
+  const requiresAdminConfiguration = (
+    (url.pathname === '/api/auth' && request.method !== 'OPTIONS')
+    || url.pathname.startsWith('/api/password/')
+    || url.pathname === '/api/uploads'
+    || (url.pathname.startsWith('/api/posts') && !['GET', 'OPTIONS'].includes(request.method))
+    || (url.pathname.startsWith('/api/categories') && !['GET', 'OPTIONS'].includes(request.method))
+  );
+
+  if (IS_PRODUCTION && requiresAdminConfiguration) {
+    await validateProductionConfiguration();
+  }
+
   if (request.method === 'GET' && url.pathname === '/api/health') {
-    sendJson(response, 200, { ok: true });
+    sendJson(response, 200, {
+      ok: true,
+      adminConfigured: (
+        ADMIN_PASSWORD !== DEFAULT_ADMIN_PASSWORD
+        && SESSION_SECRET.length >= 32
+        && (!USE_BLOB_STORAGE || Boolean(
+          process.env.BLOB_READ_WRITE_TOKEN || process.env.VERCEL_OIDC_TOKEN
+        ))
+      )
+    });
     return true;
   }
 
@@ -947,10 +971,6 @@ function serveStatic(request, response, url) {
 
 async function handleRequest(request, response) {
   try {
-    if (IS_PRODUCTION) {
-      productionValidation ||= validateProductionConfiguration();
-      await productionValidation;
-    }
     const url = new URL(request.url, `http://${request.headers.host || 'localhost'}`);
     const isLocalPreviewRequest = setLocalPreviewCors(request, response);
     if (request.method === 'OPTIONS' && url.pathname.startsWith('/api/')) {
